@@ -8,21 +8,21 @@ def pairwise(items):
     return zip(it, it)
 
 
-def cmp(l, r):
-    if isinstance(l, int) and isinstance(r, int):
-        return 0 if l == r else 1 if l < r else -1
-    if isinstance(l, list) and isinstance(r, int):
-        return cmp(l, [r])
-    if isinstance(l, int) and isinstance(r, list):
-        return cmp([l], r)
-    if isinstance(l, list) and isinstance(r, list):
-        if len(l) == 0 or len(r) == 0:
-            return 0 if len(l) == len(r) else 1 if len(l) < len(r) else -1
+def cmp(lhs, rhs):
+    if isinstance(lhs, int) and isinstance(rhs, int):
+        return 0 if lhs == rhs else 1 if lhs < rhs else -1
+    if isinstance(lhs, list) and isinstance(rhs, int):
+        return cmp(lhs, [rhs])
+    if isinstance(lhs, int) and isinstance(rhs, list):
+        return cmp([lhs], rhs)
+    if isinstance(lhs, list) and isinstance(rhs, list):
+        if len(lhs) == 0 or len(rhs) == 0:
+            return 0 if len(lhs) == len(rhs) else 1 if len(lhs) < len(rhs) else -1
         else:
-            if first_elements := cmp(l[0], r[0]):
+            if first_elements := cmp(lhs[0], rhs[0]):
                 return first_elements
             else:
-                return cmp(l[1:], r[1:])
+                return cmp(lhs[1:], rhs[1:])
 
 
 def process(input_lines):
