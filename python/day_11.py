@@ -2,7 +2,9 @@ import math
 from collections import deque
 from typing import Iterable, List
 
-from utils import read_file
+import pytest
+
+from .utils import read_file
 
 
 class Operation:
@@ -203,7 +205,7 @@ def test_modulo_factor():
 def test_calm():
     assert score_after_rounds(iter(TEST_DATA), rounds=20) == 10605
 
-    big_input = read_file("../inputs/day_11.txt", skip_empty=False)
+    big_input = read_file("inputs/day_11.txt", skip_empty=False)
     assert score_after_rounds(big_input, rounds=20) == 66802
 
 
@@ -213,5 +215,8 @@ def test_not_calm():
         == 2713310158
     )
 
-    big_input = read_file("../inputs/day_11.txt", skip_empty=False)
+
+@pytest.mark.slow
+def test_big_input():
+    big_input = read_file("inputs/day_11.txt", skip_empty=False)
     assert score_after_rounds(big_input, rounds=10_000, is_calm=False) == 21800916620

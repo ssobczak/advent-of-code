@@ -1,6 +1,6 @@
 from functools import cmp_to_key
 
-from python.utils import read_file
+from .utils import read_file
 
 
 def pairwise(items):
@@ -62,7 +62,7 @@ def correctness_score(input_lines):
 
 def test_correctness_score():
     assert correctness_score(DATA.split("\n")) == 13
-    assert correctness_score(read_file("../inputs/day_13.txt")) == 5675
+    assert correctness_score(read_file("inputs/day_13.txt")) == 5675
 
 
 MARKER_2 = [[2]]
@@ -80,4 +80,4 @@ def ordered_score(input_lines):
 
 def test_ordered_score():
     assert ordered_score(DATA.split("\n")) == 140
-    assert ordered_score(read_file("../inputs/day_13.txt")) == 5675
+    assert ordered_score(read_file("inputs/day_13.txt")) == 20383

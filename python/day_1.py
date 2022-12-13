@@ -1,4 +1,4 @@
-from utils import read_file
+from .utils import read_file
 
 
 def sums(data, n_top):
@@ -17,6 +17,6 @@ def sums(data, n_top):
 
 
 def test_sums():
-    data = list(read_file("../inputs/day_1.txt", skip_empty=False))
+    data = list(read_file("inputs/day_1.txt", skip_empty=False))
     assert sums(data, 1) == 75622
     assert sums(data, 3) == 213159

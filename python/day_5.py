@@ -1,6 +1,6 @@
 import re
 
-from utils import read_file
+from .utils import read_file
 
 
 class Stacks:
@@ -119,10 +119,10 @@ move 1 from 1 to 2"""
 
 def test_input():
     assert (
-        do_process(read_file("../inputs/day_5.txt", skip_empty=False), is_9000=True)
+        do_process(read_file("inputs/day_5.txt", skip_empty=False), is_9000=True)
         == "QNNTGTPFN"
     )
     assert (
-        do_process(read_file("../inputs/day_5.txt", skip_empty=False), is_9000=False)
+        do_process(read_file("inputs/day_5.txt", skip_empty=False), is_9000=False)
         == "GGNPJBTTR"
     )

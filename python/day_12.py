@@ -2,7 +2,7 @@ from collections import deque
 from dataclasses import dataclass
 from typing import List, Iterator
 
-from python.utils import read_file
+from .utils import read_file
 
 
 @dataclass(eq=True, frozen=True)
@@ -85,7 +85,7 @@ class Map:
 
 def test_letters_to_heights():
     lines = ["abc", "def"]
-    assert Map.letters_to_heights(lines) == [[1, 2, 3], [4, 5, 6]]
+    assert Map.letters_to_heights(lines) == [[0, 1, 2], [3, 4, 5]]
 
 
 def test_read():
@@ -104,7 +104,7 @@ abdefghi"""
 
 
 def test_data():
-    m = Map(read_file("../inputs/day_12.txt"))
+    m = Map(read_file("inputs/day_12.txt"))
 
     assert m.path_length_from_start() == 408
     assert m.shortest_path() == 399

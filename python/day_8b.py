@@ -1,4 +1,4 @@
-from utils import read_file
+from .utils import read_file
 
 
 def visibility(data, row, col):
@@ -58,4 +58,4 @@ def test_best_score():
 35390"""
 
     assert best_tree(data.split("\n")) == 8
-    assert best_tree(list(read_file("../inputs/day_8.txt"))) == 496650
+    assert best_tree(list(read_file("inputs/day_8.txt"))) == 496650

@@ -1,4 +1,4 @@
-from utils import read_file
+from .utils import read_file
 
 
 class Dir:
@@ -87,13 +87,13 @@ $ ls
 
 
 def test_input_a():
-    fs = read(read_file("../inputs/day_7.txt"))
+    fs = read(read_file("inputs/day_7.txt"))
     res = sum(size for name, size in fs.print() if size < 100_000)
     assert res == 1611443
 
 
 def test_input_b():
-    fs = read(read_file("../inputs/day_7.txt"))
+    fs = read(read_file("inputs/day_7.txt"))
     taken = fs.get_total_weight()
 
     needed = taken + 30_000_000 - 70_000_000

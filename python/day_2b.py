@@ -1,8 +1,6 @@
-import argparse
-from argparse import ArgumentParser
 from enum import Enum
 
-from utils import read_file
+from .utils import read_file
 
 
 class FigureType(Enum):
@@ -106,4 +104,4 @@ def calculate_score(input_data, debug=False):
 
 def test_calculate_score():
     assert calculate_score("A Y\nB X\nC Z".split("\n")) == 12
-    assert calculate_score(read_file("../inputs/day_2.txt")) == 13490
+    assert calculate_score(read_file("inputs/day_2.txt")) == 13490

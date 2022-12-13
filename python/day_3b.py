@@ -1,7 +1,7 @@
 import string
 from typing import Dict
 
-from utils import read_file
+from .utils import read_file
 
 
 def _init_scores() -> Dict[str, int]:
@@ -72,4 +72,4 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw"""
 
     assert calculate_score(example.split("\n")) == 70
-    assert calculate_score(read_file("../inputs/day_3.txt")) == 2548
+    assert calculate_score(read_file("inputs/day_3.txt")) == 2548

@@ -1,4 +1,4 @@
-from utils import read_file
+from .utils import read_file
 
 
 class Range:
@@ -86,5 +86,5 @@ def test_counts():
 
 
 def test_input():
-    assert count_containing(read_file("../inputs/day_4.txt")) == 498
-    assert count_overlapping(read_file("../inputs/day_4.txt")) == 859
+    assert count_containing(read_file("inputs/day_4.txt")) == 498
+    assert count_overlapping(read_file("inputs/day_4.txt")) == 859
