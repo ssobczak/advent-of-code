@@ -1,6 +1,7 @@
+import os
 from collections import deque
 
-from .utils import read_file
+from src.helpers import read_file
 
 
 def find_start(text, n):
@@ -18,7 +19,7 @@ def test_find_start():
     assert find_start("nppdvjthqldpwncqszvftbrmjlhg", 4) == 6
     assert find_start("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 14) == 26
 
-    text = next(read_file("inputs/day_6.txt"))
+    text = next(read_file(os.path.dirname(__file__) + "/../inputs/day_6.txt"))
 
     assert find_start(text, 4) == 1702
     assert find_start(text, 14) == 3559

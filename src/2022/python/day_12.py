@@ -1,8 +1,11 @@
+import os
 from collections import deque
 from dataclasses import dataclass
 from typing import List, Iterator
 
-from .utils import read_file
+import pytest
+
+from src.helpers import read_file
 
 
 @dataclass(eq=True, frozen=True)
@@ -103,8 +106,9 @@ abdefghi"""
     assert m.shortest_path() == 29
 
 
+@pytest.mark.slow
 def test_data():
-    m = Map(read_file("inputs/day_12.txt"))
+    m = Map(read_file(os.path.dirname(__file__) + "/../inputs/day_12.txt"))
 
     assert m.path_length_from_start() == 408
     assert m.shortest_path() == 399

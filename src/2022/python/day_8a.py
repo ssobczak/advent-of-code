@@ -1,4 +1,6 @@
-from .utils import read_file
+import os
+
+from src.helpers import read_file
 
 
 def rotate(matrix):
@@ -59,4 +61,4 @@ def test_read():
 33549
 35390"""
     assert read(data.split("\n")) == 21
-    assert read(read_file("inputs/day_8.txt")) == 1703
+    assert read(read_file(os.path.dirname(__file__) + "/../inputs/day_8.txt")) == 1703

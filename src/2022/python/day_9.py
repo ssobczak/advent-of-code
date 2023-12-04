@@ -1,6 +1,7 @@
+import os
 from dataclasses import dataclass
 
-from .utils import read_file
+from src.helpers import read_file
 
 
 @dataclass
@@ -139,7 +140,7 @@ R 2"""
 def test_segment():
     tail = RopeTail()
     rope = RopeSegment(tail)
-    rope.sequence(read_file("inputs/day_9.txt"))
+    rope.sequence(read_file(os.path.dirname(__file__) + "/../inputs/day_9.txt"))
     assert tail.score() == 6011
 
 
@@ -166,5 +167,5 @@ def test_final():
     head = tail = RopeTail()
     for i in range(9):
         head = RopeSegment(head)
-    head.sequence(read_file("inputs/day_9.txt"))
+    head.sequence(read_file(os.path.dirname(__file__) + "/../inputs/day_9.txt"))
     assert tail.score() == 2419

@@ -1,7 +1,10 @@
+import os
 from dataclasses import dataclass
-from typing import List, Tuple
+from typing import List
 
-from python.utils import read_file
+import pytest
+
+from src.helpers import read_file
 
 
 @dataclass(eq=True)
@@ -134,7 +137,7 @@ def test_part2():
 
 
 def test_input():
-    data = read_file("../inputs/day_14.txt")
+    data = read_file(os.path.dirname(__file__) + "/../inputs/day_14.txt")
 
     cave = Cave.from_lines(data)
     while cave.drop_sand():
@@ -142,8 +145,9 @@ def test_input():
     assert cave.grains == 578
 
 
+@pytest.mark.slow
 def test_input_ext():
-    data = read_file("../inputs/day_14.txt")
+    data = read_file(os.path.dirname(__file__) + "/../inputs/day_14.txt")
 
     cave = Cave.from_lines(data, extend=True)
     while cave.drop_sand():

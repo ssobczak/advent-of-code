@@ -1,6 +1,7 @@
+import os
 from enum import Enum
 
-from .utils import read_file
+from src.helpers import read_file
 
 
 class FigureType(Enum):
@@ -71,4 +72,7 @@ def test_total_score():
 B X
 C Z"""
     assert total_score(input.split("\n")) == 15
-    assert total_score(read_file("inputs/day_2.txt")) == 17189
+    assert (
+        total_score(read_file(os.path.dirname(__file__) + "/../inputs/day_2.txt"))
+        == 17189
+    )

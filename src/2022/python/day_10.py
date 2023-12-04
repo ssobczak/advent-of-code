@@ -1,4 +1,6 @@
-from .utils import read_file
+import os
+
+from src.helpers import read_file
 
 
 class Computer:
@@ -212,6 +214,6 @@ noop"""
 
 def test_input():
     computer = Computer()
-    computer.run(read_file("inputs/day_10.txt"))
+    computer.run(read_file(os.path.dirname(__file__) + "/../inputs/day_10.txt"))
     assert computer.total_signal == 14160
     # prints RJERPEFC

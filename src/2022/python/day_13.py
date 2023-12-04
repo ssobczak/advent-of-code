@@ -1,6 +1,7 @@
+import os
 from functools import cmp_to_key
 
-from .utils import read_file
+from src.helpers import read_file
 
 
 def cmp(lhs, rhs):
@@ -63,7 +64,12 @@ def correctness_score(input_lines):
 
 def test_correctness_score():
     assert correctness_score(DATA.split("\n")) == 13
-    assert correctness_score(read_file("inputs/day_13.txt")) == 5675
+    assert (
+        correctness_score(
+            read_file(os.path.dirname(__file__) + "/../inputs/day_13.txt")
+        )
+        == 5675
+    )
 
 
 MARKER_2 = [[2]]
@@ -81,4 +87,7 @@ def ordered_score(input_lines):
 
 def test_ordered_score():
     assert ordered_score(DATA.split("\n")) == 140
-    assert ordered_score(read_file("inputs/day_13.txt")) == 20383
+    assert (
+        ordered_score(read_file(os.path.dirname(__file__) + "/../inputs/day_13.txt"))
+        == 20383
+    )

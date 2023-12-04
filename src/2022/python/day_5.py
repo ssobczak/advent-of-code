@@ -1,6 +1,7 @@
+import os
 import re
 
-from .utils import read_file
+from src.helpers import read_file
 
 
 class Stacks:
@@ -118,11 +119,12 @@ move 1 from 1 to 2"""
 
 
 def test_input():
-    assert (
-        do_process(read_file("inputs/day_5.txt", skip_empty=False), is_9000=True)
-        == "QNNTGTPFN"
+    data = read_file(
+        os.path.dirname(__file__) + "/../inputs/day_5.txt", skip_empty=False
     )
-    assert (
-        do_process(read_file("inputs/day_5.txt", skip_empty=False), is_9000=False)
-        == "GGNPJBTTR"
+    assert do_process(data, is_9000=True) == "QNNTGTPFN"
+
+    data = read_file(
+        os.path.dirname(__file__) + "/../inputs/day_5.txt", skip_empty=False
     )
+    assert do_process(data, is_9000=False) == "GGNPJBTTR"
