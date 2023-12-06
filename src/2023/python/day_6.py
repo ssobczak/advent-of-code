@@ -37,3 +37,15 @@ Distance:   234   1027   1157   1236"""
 
     print(reduce(lambda a, b: a * b, part1(td)))
     print(wins(38677673, 234102711571236))
+
+
+def test_symbolic():
+    # another approach, added later
+    from sympy import symbols, solve
+    from math import floor, ceil
+
+    time, distance = 71530, 940200
+
+    x = symbols("x")
+    s = solve((time - x) * x - distance)
+    print(ceil(s[1]) - floor(s[0]) - 1)
