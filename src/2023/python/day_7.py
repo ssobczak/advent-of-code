@@ -86,7 +86,7 @@ class Hand:
 
         best_hand = self
 
-        for j_replacement in self.card_strength.order[:-1]:
+        for j_replacement in self.cards.replace("J", ""):
             new_hand = Hand(self.cards, self.card_strength, j_replacement)
             if new_hand.hand_type.value > best_hand.hand_type.value:
                 best_hand = new_hand
@@ -134,9 +134,9 @@ def test_part2():
     assert part2(SAMPLE_INPUT.splitlines(keepends=False)) == 5905
 
 
-if __name__ == "__main__":
+def test_main():
     final = read_file(os.path.dirname(__file__) + "/../inputs/day_7.txt")
-    print(part1(final))
+    assert part1(final) == 245794640
 
     final = read_file(os.path.dirname(__file__) + "/../inputs/day_7.txt")
-    print(part2(final))
+    assert part2(final) == 247899149
