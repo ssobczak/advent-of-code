@@ -86,8 +86,8 @@ class Hand:
 
         best_hand = self
 
-        for replacement in self.card_strength.order[:-1]:
-            new_hand = Hand(self.cards, self.card_strength, replacement)
+        for j_replacement in self.card_strength.order[:-1]:
+            new_hand = Hand(self.cards, self.card_strength, j_replacement)
             if new_hand.hand_type.value > best_hand.hand_type.value:
                 best_hand = new_hand
 
