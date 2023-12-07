@@ -6,14 +6,11 @@ from typing import Tuple, List
 
 from src.helpers import read_file
 
-INPUT = """32T3K 765
+SAMPLE_INPUT = """32T3K 765
 T55J5 684
 KK677 28
 KTJJT 220
 QQQJA 483"""
-
-card_strength = ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "J"]
-card_strength_map = {card: i + 2 for i, card in enumerate(reversed(card_strength))}
 
 
 class HandStrength(Enum):
@@ -26,10 +23,30 @@ class HandStrength(Enum):
     HIGH_CARD = 1
 
 
+class CardStrength:
+    def __init__(self, j_lowest):
+        self.j_lowest = j_lowest
+
+    @cached_property
+    def order(self):
+        if self.j_lowest:
+            return ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "J"]
+        else:
+            return ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
+
+    @cached_property
+    def strength_map(self):
+        return {card: i + 2 for i, card in enumerate(reversed(self.order))}
+
+    def get(self, card):
+        return self.strength_map[card]
+
+
 class Hand:
-    def __init__(self, cards, j_replacement="J"):
+    def __init__(self, cards, card_strength: CardStrength, j_replacement="J"):
         self.cards = cards
         self.j_replacement = j_replacement
+        self.card_strength = card_strength
 
     @cached_property
     def counts(self) -> List[Tuple[int, str]]:
@@ -37,11 +54,12 @@ class Hand:
         cnts = Counter(c for c in to_figure)
         return sorted([(cnt, card) for card, cnt in cnts.items()], reverse=True)
 
+    @cached_property
     def card_strengths(self) -> List[int]:
-        return [card_strength_map[card] for cnt, card in self.counts]
+        return [self.card_strength.get(card) for card in self.cards]
 
     def strength(self):
-        return self.hand_type.value, [card_strength_map[card] for card in self.cards]
+        return self.hand_type.value, self.card_strengths
 
     @cached_property
     def hand_type(self):
@@ -62,14 +80,14 @@ class Hand:
         else:
             return HandStrength.HIGH_CARD
 
-    def optimized_J(self):
+    def optimized_j(self):
         if "J" not in self.cards:
             return self
 
         best_hand = self
 
-        for replacement in card_strength[:-1]:
-            new_hand = Hand(self.cards, replacement)
+        for replacement in self.card_strength.order[:-1]:
+            new_hand = Hand(self.cards, self.card_strength, replacement)
             if new_hand.hand_type.value > best_hand.hand_type.value:
                 best_hand = new_hand
 
@@ -79,10 +97,10 @@ class Hand:
         return f"Hand({self.cards}, J->{self.j_replacement}, {self.hand_type})"
 
 
-def parse(data):
+def parse(data, card_strength_map):
     for line in data:
         h, bet = line.split()
-        yield Hand(h), int(bet)
+        yield Hand(h, card_strength_map), int(bet)
 
 
 def score(data):
@@ -90,34 +108,35 @@ def score(data):
 
     res = 0
     for i, (h, bet) in enumerate(wins):
-        print(i + 1, bet, h)
+        # print(i + 1, bet, h)
         res += bet * (i + 1)
 
     return res
 
 
 def part1(data):
-    return score(data)
+    card_strength = CardStrength(j_lowest=False)
+    return score(parse(data, card_strength))
 
 
 def test_part1():
-    td = list(parse(INPUT.splitlines(keepends=False)))
-    assert part1(td) == 6440
+    assert part1(SAMPLE_INPUT.splitlines(keepends=False)) == 6440
 
 
 def part2(data):
-    optimized = [(h.optimized_J(), bet) for h, bet in data]
+    card_strength = CardStrength(j_lowest=True)
+    parsed = parse(data, card_strength)
+    optimized = [(h.optimized_j(), bet) for h, bet in parsed]
     return score(optimized)
 
 
 def test_part2():
-    td = parse(INPUT.splitlines(keepends=False))
-    assert part2(td) == [4, 8, 9]
+    assert part2(SAMPLE_INPUT.splitlines(keepends=False)) == 5905
 
 
-def test_final():
+if __name__ == "__main__":
     final = read_file(os.path.dirname(__file__) + "/../inputs/day_7.txt")
-    td = list(parse(final))
+    print(part1(final))
 
-    print(part1(td))
-    print(part2(td))
+    final = read_file(os.path.dirname(__file__) + "/../inputs/day_7.txt")
+    print(part2(final))
