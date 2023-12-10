@@ -214,6 +214,6 @@ noop"""
 
 def test_input():
     computer = Computer()
-    computer.run(read_file(os.path.dirname(__file__) + "/../inputs/day_10.txt"))
+    computer.run(read_file(os.path.dirname(__file__) + "/../inputs/day_10.txt.txt"))
     assert computer.total_signal == 14160
     # prints RJERPEFC
