@@ -178,7 +178,7 @@ def part2(data) -> int:
     small_map = Map([list(line) for line in data])
     start = Node(small_map, *small_map.find_start())
 
-    print(start)
+    print(small_map)
 
     grown_data = grow(data)
     grown_map = Map([list(line) for line in grown_data], known_start_symbol=start.s_pipe())
@@ -200,12 +200,13 @@ def part2(data) -> int:
     return res
 
 
-if __name__ == "__main__":
+def test_example():
     data = """7-F7-
 .FJ|7
 SJLL7
 |F--J
 LJ.LJ"""
-    # assert part2(data.splitlines()) == 1
+    # assert part1(data.splitlines()) == 8
+    assert part2(data.splitlines()) == 1
 
-    print(part2(list(read_file(os.path.dirname(__file__) + "/../inputs/day_10.txt"))))
+    # print(part2(list(read_file(os.path.dirname(__file__) + "/../inputs/day_10.txt"))))
