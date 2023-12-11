@@ -206,7 +206,7 @@ def test_example():
 SJLL7
 |F--J
 LJ.LJ"""
-    # assert part1(data.splitlines()) == 8
+    assert part1(data.splitlines()) == 8
     assert part2(data.splitlines()) == 1
 
     # print(part2(list(read_file(os.path.dirname(__file__) + "/../inputs/day_10.txt"))))

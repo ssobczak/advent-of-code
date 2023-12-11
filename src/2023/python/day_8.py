@@ -3,16 +3,6 @@ import os
 
 from src.helpers import read_file
 
-SAMPLE_INPUT = """LR
-11A = (11B, XXX)
-11B = (XXX, 11Z)
-11Z = (11B, XXX)
-22A = (22B, XXX)
-22B = (22C, 22C)
-22C = (22Z, 22Z)
-22Z = (22B, 22B)
-XXX = (XXX, XXX)"""
-
 
 def parse(data):
     instructions = data[0]
@@ -66,10 +56,41 @@ def part2(instructions, graph):
 
 
 def test_part1():
-    instructions, graph = parse(SAMPLE_INPUT.splitlines(keepends=False))
-    assert part2(instructions, graph) == 6
+    sample1 = """RL
+AAA = (BBB, CCC)
+BBB = (DDD, EEE)
+CCC = (ZZZ, GGG)
+DDD = (DDD, DDD)
+EEE = (EEE, EEE)
+GGG = (GGG, GGG)
+ZZZ = (ZZZ, ZZZ)"""
+    instructions, graph = parse(sample1.splitlines(keepends=False))
+    assert part1("AAA", instructions, graph) == 2
+
+    sample2 = """LLR
+AAA = (BBB, BBB)
+BBB = (AAA, ZZZ)
+ZZZ = (ZZZ, ZZZ)"""
+    instructions, graph = parse(sample2.splitlines(keepends=False))
+    assert part1("AAA", instructions, graph) == 6
+
+    final = list(read_file(os.path.dirname(__file__) + "/../inputs/day_8.txt"))
+    assert part1("AAA", *parse(final)) == 15517
 
 
 def test_part2():
+    SAMPLE_INPUT = """LR
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)"""
+
+    instructions, graph = parse(SAMPLE_INPUT.splitlines(keepends=False))
+    assert part2(instructions, graph) == 6
+
     final = list(read_file(os.path.dirname(__file__) + "/../inputs/day_8.txt"))
-    assert part2(*parse(final)) == 245794640
+    assert part2(*parse(final)) == 14935034899483
