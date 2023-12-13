@@ -21,8 +21,8 @@ def symetric_x(pattern, i, a):
 
 
 def test_symetric_x():
-    # assert symetric_x("#.##..##.", 1) is False
-    # assert symetric_x("#.##..##.", 4) is True
+    assert symetric_x("#.##..##.", 1, 1) is False
+    assert symetric_x("#.##..##.", 4, 4) is True
 
     data = [
         "#...##..#",
@@ -34,7 +34,7 @@ def test_symetric_x():
         "#....#..#",
     ]
 
-    assert symetric_x(data, 3) is True
+    assert symetric_x(data, 3, 3) is True
 
 
 def symetric_y(pattern, i, b):
