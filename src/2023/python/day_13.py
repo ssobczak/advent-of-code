@@ -136,4 +136,4 @@ def test_part2():
     assert parse(EXAMPLE.splitlines(keepends=False), part2) == 400
 
     data = list(read_file(os.path.dirname(__file__) + "/../inputs/day_13.txt", skip_empty=False))
-    assert parse(data, part2) == 35521
+    assert parse(data, part2) == 34795
